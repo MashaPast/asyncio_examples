@@ -2,14 +2,19 @@
 
 import asyncio
 import websockets
+from client_server_hello.logger import appLogger
+
 
 
 async def hello(websocket, path):
+    appLogger.debug('Getting message from client')
     name = await websocket.recv()
+
     print(f"< {name}")
 
     greeting = f"Hello {name}!"
 
+    appLogger.debug('Sending message to client')
     await websocket.send(greeting)
     print(f"> {greeting}")
 
