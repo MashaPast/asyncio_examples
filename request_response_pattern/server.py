@@ -1,11 +1,17 @@
 import websockets
 import asyncio
+from logger import appLogger
+
 
 async def calculate(websocket, path):
+    appLogger.debug('Receiving message from server')
     str_recieved = await websocket.recv()
     print(str_recieved)
 
+    appLogger.debug('Processing data')
     result = str_recieved + 'b'
+
+    appLogger.debug('Sending answer to client')
     await websocket.send(result)
     print(result)
 
